@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: configserver
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///C:\intellij\projects\ecom-application(micro-services)\configserver\src\main\resources\config
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASS:guest}
+    connection-timeout: 30000
+    virtual-host: ${RABBITMQ_VHOST:guest}
+server:
+  port: 8888
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: busrefresh

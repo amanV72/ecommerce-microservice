@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="EurekaServer" options="-parameters" />
+      <module name="EurekaServer.main" options="-parameters" />
+      <module name="EurekaServer.test" options="-parameters" />
+      <module name="configserver" options="-parameters" />
+      <module name="configserver.main" options="-parameters" />
+      <module name="configserver.test" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="gateway.main" options="-parameters" />
+      <module name="gateway.test" options="-parameters" />
+      <module name="notification" options="-parameters" />
+      <module name="notification.main" options="-parameters" />
+      <module name="notification.test" options="-parameters" />
+      <module name="order" options="-parameters" />
+      <module name="order.main" options="-parameters" />
+      <module name="order.test" options="-parameters" />
+      <module name="product" options="-parameters" />
+      <module name="product.main" options="-parameters" />
+      <module name="product.test" options="-parameters" />
+      <module name="user" options="-parameters" />
+      <module name="user.main" options="-parameters" />
+      <module name="user.test" options="-parameters" />
+    </option>
+  </component>
+</project>
