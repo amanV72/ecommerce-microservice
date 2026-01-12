@@ -81,6 +81,7 @@ public class UserService {
         User user= new User();
         mapToUser(user,userRequest);
         user.setKeycloakId(keycloakUserId);
+        adminService.assignClientRoleToUser(userRequest.getUsername(),"USER", keycloakUserId);
         userRepo.save(user);
     }
 
