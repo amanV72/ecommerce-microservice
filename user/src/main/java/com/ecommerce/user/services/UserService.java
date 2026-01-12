@@ -23,16 +23,16 @@ public class UserService {
     //private List<User> users = new ArrayList<>();
     //private Long nextId= 1L;
 
-    private UserResponse mapToUserResponse(User user){
-        UserResponse response= new UserResponse();
+    private UserResponse mapToUserResponse(User user) {
+        UserResponse response = new UserResponse();
         response.setId(String.valueOf(user.getId()));
         response.setFirstName(user.getFirstName());
         response.setLastName(user.getLastName());
         response.setEmail(user.getEmail());
         response.setPhone(user.getPhone());
         response.setUserRole(user.getUserRole());
-        if(user.getAddress()!=null){
-            AddressDTO addressDTO= new AddressDTO();
+        if (user.getAddress() != null) {
+            AddressDTO addressDTO = new AddressDTO();
             addressDTO.setStreet(user.getAddress().getStreet());
             addressDTO.setCity(user.getAddress().getCity());
             addressDTO.setState(user.getAddress().getState());
@@ -45,14 +45,14 @@ public class UserService {
 
     }
 
-    private void mapToUser(User user, UserRequest userRequest){
+    private void mapToUser(User user, UserRequest userRequest) {
 
         user.setFirstName(userRequest.getFirstName());
         user.setLastName(userRequest.getLastName());
         user.setEmail(userRequest.getEmail());
         user.setPhone(userRequest.getPhone());
-        if(userRequest.getAddress()!=null){
-            Address address= new Address();
+        if (userRequest.getAddress() != null) {
+            Address address = new Address();
             address.setCity(userRequest.getAddress().getCity());
             address.setStreet(userRequest.getAddress().getStreet());
             address.setState(userRequest.getAddress().getState());
@@ -65,7 +65,7 @@ public class UserService {
 
 
     public List<UserResponse> fetchUsers() {
-        List<User> users= userRepo.findAll();
+        List<User> users = userRepo.findAll();
 
         return users.stream()
                 .map(this::mapToUserResponse)
@@ -75,25 +75,25 @@ public class UserService {
     public void addUser(UserRequest userRequest) {
         //user.setId(nextId++);
 
-        String token= adminService.getAdminAccessToken();
-        String keycloakUserId=adminService.createUser(token,userRequest);
+        String token = adminService.getAdminAccessToken();
+        String keycloakUserId = adminService.createUser(token, userRequest);
 
-        User user= new User();
-        mapToUser(user,userRequest);
+        User user = new User();
+        mapToUser(user, userRequest);
         user.setKeycloakId(keycloakUserId);
-        adminService.assignClientRoleToUser(userRequest.getUsername(),"USER", keycloakUserId);
+        adminService.assignClientRoleToUser(userRequest.getUsername(), "USER", keycloakUserId);
         userRepo.save(user);
     }
 
-    public Optional<UserResponse> fetchOneUser(String id){
+    public Optional<UserResponse> fetchOneUser(String id) {
         return userRepo.findById(String.valueOf(id)).map(this::mapToUserResponse);
 
     }
 
-    public boolean updateUser(String id,UserRequest userRequest) {
+    public boolean updateUser(String id, UserRequest userRequest) {
         return userRepo.findById(String.valueOf(id))
-                .map(existingUser->{
-                    mapToUser(existingUser,userRequest);
+                .map(existingUser -> {
+                    mapToUser(existingUser, userRequest);
                     userRepo.save(existingUser);
                     return true;
                 }).orElse(false);
