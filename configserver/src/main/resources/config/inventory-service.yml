@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/inventory
+    username: ${DB_USER}
+    password: ${DB_PASS}
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  cloud:
+    function:
+      definition: getProductId
+    stream:
+      bindings:
+        getProductId-in-0:
+          destination: product-created
+          group: inventory-service-group
+      kafka:
+        binder:
+          brokers: localhost:9092
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: localhost
+
+server:
+  port: 8085

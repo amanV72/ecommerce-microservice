@@ -17,6 +17,9 @@
       <module name="EurekaServer" options="-parameters" />
       <module name="EurekaServer.main" options="-parameters" />
       <module name="EurekaServer.test" options="-parameters" />
+      <module name="cart" options="-parameters" />
+      <module name="cart.main" options="-parameters" />
+      <module name="cart.test" options="-parameters" />
       <module name="configserver" options="-parameters" />
       <module name="configserver.main" options="-parameters" />
       <module name="configserver.test" options="-parameters" />

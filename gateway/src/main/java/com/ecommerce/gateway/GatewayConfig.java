@@ -12,61 +12,86 @@ import reactor.core.publisher.Mono;
 @Configuration
 public class GatewayConfig {
     @Bean
-    public RedisRateLimiter redisRateLimiter(){
+    public RedisRateLimiter redisRateLimiter() {
         return new RedisRateLimiter(
                 10,
                 20,
                 1);
     }
 
+    //    @Bean
+//    public KeyResolver hostNameKeyResolver(){
+//        return exchange -> Mono.just(exchange.getRequest().getRemoteAddress().getHostName());
+//    }
     @Bean
-    public KeyResolver hostNameKeyResolver(){
-        return exchange -> Mono.just(exchange.getRequest().getRemoteAddress().getHostName());
+    public KeyResolver userKeyResolver() {
+        return exchange ->
+                Mono.justOrEmpty(exchange.getRequest()
+                                .getHeaders()
+                                .getFirst("X-User-ID"))
+                        .switchIfEmpty(Mono.just("anonymous"));
     }
 
+
     @Bean
-    public RouteLocator customRouteLocator(RouteLocatorBuilder routeLocatorBuilder){
+    public RouteLocator customRouteLocator(RouteLocatorBuilder routeLocatorBuilder) {
         return routeLocatorBuilder.routes()
-                .route("product-service",r -> r
+                .route("product-service", r -> r
                         .path("/api/products/**")
-                        .filters(f->f.retry(retryConfig -> retryConfig
+                        .filters(f -> f.retry(retryConfig -> retryConfig
                                         .setRetries(10)
                                         .setMethods(HttpMethod.GET)
                                 )
                                 .requestRateLimiter(config -> config
                                         .setRateLimiter(redisRateLimiter())
-                                        .setKeyResolver(hostNameKeyResolver())
+                                        .setKeyResolver(userKeyResolver())
                                 )
                                 .circuitBreaker(config -> config
                                         .setName("ecomBreaker")
                                         .setFallbackUri("forward:/fallback/products")
-                        ))
+                                ))
                         .uri("lb://PRODUCT-SERVICE")
                 )
-                .route("user-service",r -> r
+                .route("inventory-service",r->r
+                        .path("/api/inventory/**")
+//                        .filters(f-> f.circuitBreaker(config -> config
+//                                .setName("ecomBreaker")
+//                                .setFallbackUri("forward:/fallback/inventory")
+//                        ))
+                        .uri("lb://INVENTORY-SERVICE")
+                )
+                .route("user-service", r -> r
                         .path("/api/users/**")
-                       .filters(f->f.circuitBreaker(config -> config
+                        .filters(f -> f.circuitBreaker(config -> config
                                 .setName("ecomBreaker")
                                 .setFallbackUri("forward:/fallback/user")
-                       ))
+                        ))
                         .uri("lb://USER-SERVICE")
                 )
-                .route("order-service",r -> r
-                        .path("/api/orders/**","/api/cart/**")
-                        .filters(f->f.circuitBreaker(config -> config
+                .route("cart-service", r -> r
+                        .path("/api/cart/**")
+                        .filters(f -> f.circuitBreaker(config -> config
+                                .setName("ecomBreaker")
+                                .setFallbackUri("forward:/fallback/order")
+                        ))
+                        .uri("lb://CART-SERVICE")
+                )
+                .route("order-service", r -> r
+                        .path("/api/orders/**")
+                        .filters(f -> f.circuitBreaker(config -> config
                                 .setName("ecomBreaker")
                                 .setFallbackUri("forward:/fallback/order")
                         ))
                         .uri("lb://ORDER-SERVICE")
                 )
-                .route("eureka-server",r -> r
+                .route("eureka-server", r -> r
                         .path("/eureka/main")
-                        .filters(f->f.rewritePath(
+                        .filters(f -> f.rewritePath(
                                 "/eureka/main",
                                 "/"))
                         .uri("http://localhost:8761")
                 )
-                .route("eureka-server-static",r -> r
+                .route("eureka-server-static", r -> r
                         .path("/eureka/**")
                         .uri("http://localhost:8761")
                 ).build();

@@ -1,6 +1,7 @@
 package com.ecommerce.inventory.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,22 +11,22 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "inventory_table")
+@AllArgsConstructor
+@Entity
+@Table(name = "inventory_table")
 public class Inventory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long product_id;
+    private Long productId;
 
-    private Long totalQuantity;
-    private Long reservedQuantity;
-    private Long availableQuantity;
+    private int totalQuantity;
+    private int reservedQuantity;
 
     @Enumerated(EnumType.STRING)
     private InventoryStatus status;
-
-    @Version
-    private Long version;
+//
+//    @Version
+//    private Long version;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

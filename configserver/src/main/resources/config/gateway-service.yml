@@ -30,6 +30,10 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8443/realms/ecom-app
+  cloud:
+    loadbalancer:
+      eager-load:
+        enabled: true
 eureka:
   client:
     serviceUrl:

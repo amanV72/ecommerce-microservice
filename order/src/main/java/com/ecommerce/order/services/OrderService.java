@@ -1,10 +1,11 @@
 package com.ecommerce.order.services;
 
+import com.ecommerce.order.clients.CartServiceClient;
+import com.ecommerce.order.dtos.CartResponse;
 import com.ecommerce.order.dtos.OrderCreatedEventDto;
 import com.ecommerce.order.dtos.OrderItemDTO;
 import com.ecommerce.order.dtos.OrderResponse;
 import com.ecommerce.order.models.OrderStatus;
-import com.ecommerce.order.models.CartItem;
 import com.ecommerce.order.models.Order;
 import com.ecommerce.order.models.OrderItem;
 import com.ecommerce.order.repositories.OrderRepo;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class OrderService {
 
     private final OrderRepo orderRepo;
-    private final CartService cartService;
+    private final CartServiceClient cartServiceClient;
 //    private final RabbitTemplate rabbitTemplate;
 //
 //    @Value("${rabbitmq.exchange.name}")
@@ -36,30 +36,19 @@ public class OrderService {
 
 
     public Optional<OrderResponse> createOrder(String userId) {
-        /// Validate for cart items
-        List<CartItem> cartItems = cartService.getCart(userId);
-        if (cartItems.isEmpty()) {
-            return Optional.empty();
-        }
-//
-//        /// Validate for User
-//        Optional<User> userOpt = userRepo.findById(Long.valueOf(userId));
-//        if (userId.isEmpty()) {
-//            return Optional.empty();
-//        }
-//        User user = userOpt.get();
+        /// Validate for cart items (REST call to cart-service)
+        CartResponse cartResponse=cartServiceClient.getCartDetails(userId);
+        if(cartResponse==null) return Optional.empty();
 
-        /// Calculate Total price
-        BigDecimal totalPrice = cartItems.stream()
-                .map(CartItem::getTotalPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        /// Total price
+        BigDecimal totalAmount = cartResponse.getCartTotal();
 
         /// Create Order
         Order order = new Order();
-        order.setUserId(userId);
-        order.setStatus(OrderStatus.CONFIRMED);
-        order.setTotalAmount(totalPrice);
-        List<OrderItem> orderItems = cartItems.stream()
+        order.setUserId(cartResponse.getUserId());
+        order.setStatus(OrderStatus.PENDING);
+        order.setTotalAmount(totalAmount);
+        List<OrderItem> orderItems = cartResponse.getItems().stream()
                 .map(item -> new OrderItem(
                         null,
                         item.getProductId(),
@@ -71,7 +60,7 @@ public class OrderService {
         Order savedOrder = orderRepo.save(order);
 
         // Clear the cart
-        cartService.clearCart(userId);
+        // cartService.clearCart(userId);
 
         //publish to RabbitMQ
         OrderCreatedEventDto event=new OrderCreatedEventDto(

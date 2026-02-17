@@ -23,7 +23,7 @@ spring:
 #    virtual-host: ${RABBITMQ_VHOST:guest}
 
 server:
-  port: 8084
+  port: 8085
 
 #rabbitmq:
 #  exchange:
