@@ -2,13 +2,15 @@ package com.ecommerce.order.services;
 
 import com.ecommerce.order.clients.CartServiceClient;
 import com.ecommerce.order.dtos.CartResponse;
-import com.ecommerce.order.dtos.OrderCreatedEventDto;
+import com.ecommerce.order.dtos.eventDto.InventoryFailedEvent;
+import com.ecommerce.order.dtos.eventDto.OrderCreatedEventDto;
 import com.ecommerce.order.dtos.OrderItemDTO;
 import com.ecommerce.order.dtos.OrderResponse;
 import com.ecommerce.order.models.OrderStatus;
 import com.ecommerce.order.models.Order;
 import com.ecommerce.order.models.OrderItem;
 import com.ecommerce.order.repositories.OrderRepo;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.cloud.stream.function.StreamBridge;
@@ -35,6 +37,7 @@ public class OrderService {
     private final StreamBridge streamBridge;
 
 
+    @Transactional
     public Optional<OrderResponse> createOrder(String userId) {
         /// Validate for cart items (REST call to cart-service)
         CartResponse cartResponse=cartServiceClient.getCartDetails(userId);
@@ -67,9 +70,7 @@ public class OrderService {
                 savedOrder.getId(),
                 savedOrder.getUserId(),
                 savedOrder.getTotalAmount(),
-                savedOrder.getStatus(),
                 savedOrder.getItems().stream().map(item -> new OrderItemDTO(
-                        item.getId(),
                         item.getProductId(),
                         item.getQuantity(),
                         item.getPrice(),
@@ -81,7 +82,8 @@ public class OrderService {
 //        rabbitTemplate.convertAndSend(exchangeName,
 //                routingKey,
 //               event);
-        streamBridge.send("createOrder-out-0",event);
+        streamBridge.send("orderCreated-out-0",event);
+        //streamBridge.send("createOrder-out-0",event);
 
 
         return Optional.of(orderToOrderResponse(savedOrder));
@@ -94,7 +96,6 @@ public class OrderService {
                 order.getTotalAmount(),
                 order.getStatus(),
                 order.getItems().stream().map(item -> new OrderItemDTO(
-                        item.getId(),
                         item.getProductId(),
                         item.getQuantity(),
                         item.getPrice(),
@@ -103,4 +104,16 @@ public class OrderService {
                 order.getCreatedAt()
         );
     }
+
+    @Transactional
+    public void cancelOrder(InventoryFailedEvent event) {
+
+        Order order = orderRepo.findById(event.getOrderId())
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        if (order.getStatus() != OrderStatus.CANCELLED) {
+            order.setStatus(OrderStatus.CANCELLED);
+        }
+    }
+
 }

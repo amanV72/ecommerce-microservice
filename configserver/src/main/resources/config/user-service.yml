@@ -1,0 +1,66 @@
+server:
+  port: 8082
+
+spring:
+  # datasource:
+  #   url: jdbc:postgresql://localhost:5432/userdb
+  #   username: root
+  #   password: password
+  #
+  # jpa:
+  #   database: POSTGRESQL
+  #   database-platform: org.hibernate.dialect.PostgreSQLDialect
+  #   show-sql: true
+  #   hibernate:
+  #     ddl-auto: update
+
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
+      database: userdb
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASS:guest}
+    virtual-host: ${RABBITMQ_VHOST:guest}
+    connection-timeout: 30000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  tracing:
+    sampling:
+      probability: 1.0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: localhost
+
+logging:
+  file:
+    name: logs/${spring.application.name}.log
+  logback:
+    rollingpolicy:
+      max-file-size: 5MB
+      max-history: 7
+  # level:
+  #   root: INFO
+  #   com.ecommerce.user: TRACE
+
+keycloak:
+  admin:
+    username: user
+    password: user
+    server-url: http://localhost:8443
+    realm: ecom-app
+    client-id: admin-cli
+    client-uuid: 3220fa53-994e-48f9-a27b-3ae2f46bc084

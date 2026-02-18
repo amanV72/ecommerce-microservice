@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class InventoryController {
     private final InventoryService inventoryService;
 
+    ///Admin endpoint
     @PostMapping("/{productId}/restock")
     public ResponseEntity<Void> addStock(
             @PathVariable Long productId,
@@ -25,12 +26,13 @@ public class InventoryController {
         return ResponseEntity.noContent().build();
     }
 
+
     @GetMapping("/{productId}/availability")
     public ResponseEntity<Boolean> checkInventory(
             @PathVariable Long productId,
             @RequestParam("qty")Integer quantity
             ){
-        boolean isAvailable=inventoryService.hasSufficientStock(productId,quantity);
+        boolean isAvailable=inventoryService.hasSufficientStockForRest(productId,quantity);
 
         return ResponseEntity.ok(isAvailable);
     }

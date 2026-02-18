@@ -24,7 +24,7 @@ public class OrderEventConsumer {
 //
 //    }
     @Bean
-    public Consumer<OrderCreatedEventDto> orderCreated(){
+    public Consumer<OrderCreatedEventDto> orderSuccess(){
         return event ->{
             log.info("Received order event order ID: {}",event.getOrderId());
             log.info("Received order event user ID: {}",event.getUserId());

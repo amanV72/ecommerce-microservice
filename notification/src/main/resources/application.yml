@@ -1,34 +1,8 @@
 spring:
   application:
     name: notification-service
-
-  cloud:
-    function:
-      definition: orderCreated
-    stream:
-      bindings:
-        orderCreated-in-0:
-          destination: order.exchange.new
-          group: notification-group
-      kafka:
-        binders:
-          brokers: localhost:9092
-
-#  rabbitmq:
-#    host: ${RABBITMQ_HOST:localhost}
-#    port: ${RABBITMQ_PORT:5672}
-#    username: ${RABBITMQ_USER:guest}
-#    password: ${RABBITMQ_PASS:guest}
-#    connection-timeout: 30000
-#    virtual-host: ${RABBITMQ_VHOST:guest}
-
-server:
-  port: 8085
-
-#rabbitmq:
-#  exchange:
-#    name: order.exchange
-#  queue:
+  config:
+    import: optional:configserver:http://localhost:8888
 #    name: order.queue
 #  routing:
 #    key: order.tracking

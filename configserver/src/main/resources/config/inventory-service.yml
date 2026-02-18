@@ -12,12 +12,20 @@ spring:
 
   cloud:
     function:
-      definition: getProductId
+      definition: initializeProduct;orderCreated
     stream:
       bindings:
-        getProductId-in-0:
+        initializeProduct-in-0:
           destination: product-created
+          content-type: application/json
           group: inventory-service-group
+        orderCreated-in-0:
+          destination: order-created
+          content-type: application/json
+          group: inventory-service-group
+        inventoryFailed-out-0:
+          destination: inventory-failed
+          content-type: application/json
       kafka:
         binder:
           brokers: localhost:9092

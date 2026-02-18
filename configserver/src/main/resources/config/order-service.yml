@@ -15,10 +15,19 @@ spring:
       ddl-auto: update
 
   cloud:
+    function:
+      definition: inventoryFailed
     stream:
       bindings:
-        createOrder-out-0:
-          destination: order.exchange.new
+        orderSuccess-out-0:
+          destination: order-success
+          content-type: application/json
+        orderCreated-out-0:
+          destination: order-created
+          content-type: application/json
+        inventoryFailed-in-0:
+          destination: inventory-failed
+          group: order-service-group
           content-type: application/json
       kafka:
         binders:
