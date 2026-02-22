@@ -26,6 +26,9 @@ spring:
         inventoryFailed-out-0:
           destination: inventory-failed
           content-type: application/json
+        inventoryReserved-out-0:
+          destination: inventory-reserved
+          content-type: application/json
       kafka:
         binder:
           brokers: localhost:9092

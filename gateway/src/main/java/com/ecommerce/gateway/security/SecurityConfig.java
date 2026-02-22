@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .pathMatchers("/api/orders/**").hasRole("USER")
                         .pathMatchers("/api/users/**").hasRole("USER")
                         .pathMatchers("/api/inventory/**").hasRole("USER")
+                        .pathMatchers("/api/payments/**").hasRole("USER")
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oauth-> oauth.jwt(jwt->jwt.jwtAuthenticationConverter(grantedAuthoritiesExtractor())))
                 .build();

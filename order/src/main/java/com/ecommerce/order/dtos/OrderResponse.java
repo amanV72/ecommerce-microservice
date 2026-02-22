@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderResponse {
     private Long id;
-    private BigDecimal totalAmount;
+    private Long totalAmount;
     private OrderStatus status;
     private List<OrderItemDTO> items;
     private LocalDateTime createdAt;

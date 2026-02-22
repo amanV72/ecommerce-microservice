@@ -2,10 +2,12 @@ package com.ecommerce.order.services;
 
 import com.ecommerce.order.clients.CartServiceClient;
 import com.ecommerce.order.dtos.CartResponse;
+import com.ecommerce.order.dtos.OrderResponseForPaymentId;
 import com.ecommerce.order.dtos.eventDto.InventoryFailedEvent;
 import com.ecommerce.order.dtos.eventDto.OrderCreatedEventDto;
 import com.ecommerce.order.dtos.OrderItemDTO;
 import com.ecommerce.order.dtos.OrderResponse;
+import com.ecommerce.order.dtos.eventDto.PaymentCreatedEvent;
 import com.ecommerce.order.models.OrderStatus;
 import com.ecommerce.order.models.Order;
 import com.ecommerce.order.models.OrderItem;
@@ -26,7 +28,7 @@ public class OrderService {
 
     private final OrderRepo orderRepo;
     private final CartServiceClient cartServiceClient;
-//    private final RabbitTemplate rabbitTemplate;
+    //    private final RabbitTemplate rabbitTemplate;
 //
 //    @Value("${rabbitmq.exchange.name}")
 //    private String exchangeName;
@@ -40,16 +42,16 @@ public class OrderService {
     @Transactional
     public Optional<OrderResponse> createOrder(String userId) {
         /// Validate for cart items (REST call to cart-service)
-        CartResponse cartResponse=cartServiceClient.getCartDetails(userId);
-        if(cartResponse==null) return Optional.empty();
+        CartResponse cartResponse = cartServiceClient.getCartDetails(userId);
+        if (cartResponse == null) return Optional.empty();
 
         /// Total price
-        BigDecimal totalAmount = cartResponse.getCartTotal();
+        Long totalAmount = cartResponse.getCartTotal();
 
         /// Create Order
         Order order = new Order();
         order.setUserId(cartResponse.getUserId());
-        order.setStatus(OrderStatus.PENDING);
+        order.setStatus(OrderStatus.CREATED);
         order.setTotalAmount(totalAmount);
         List<OrderItem> orderItems = cartResponse.getItems().stream()
                 .map(item -> new OrderItem(
@@ -66,7 +68,7 @@ public class OrderService {
         // cartService.clearCart(userId);
 
         //publish to RabbitMQ
-        OrderCreatedEventDto event=new OrderCreatedEventDto(
+        OrderCreatedEventDto event = new OrderCreatedEventDto(
                 savedOrder.getId(),
                 savedOrder.getUserId(),
                 savedOrder.getTotalAmount(),
@@ -74,7 +76,7 @@ public class OrderService {
                         item.getProductId(),
                         item.getQuantity(),
                         item.getPrice(),
-                        item.getPrice().multiply(new BigDecimal(item.getQuantity()))
+                        item.getPrice() * item.getQuantity()
 
                 )).toList(),
                 savedOrder.getCreatedAt()
@@ -82,9 +84,8 @@ public class OrderService {
 //        rabbitTemplate.convertAndSend(exchangeName,
 //                routingKey,
 //               event);
-        streamBridge.send("orderCreated-out-0",event);
+        streamBridge.send("orderCreated-out-0", event);
         //streamBridge.send("createOrder-out-0",event);
-
 
         return Optional.of(orderToOrderResponse(savedOrder));
 
@@ -99,7 +100,7 @@ public class OrderService {
                         item.getProductId(),
                         item.getQuantity(),
                         item.getPrice(),
-                        item.getPrice().multiply(new BigDecimal(item.getQuantity()))
+                        item.getPrice() * item.getQuantity()
                 )).toList(),
                 order.getCreatedAt()
         );
@@ -116,4 +117,22 @@ public class OrderService {
         }
     }
 
+    @Transactional
+    public void attachPaymentIdToModel(PaymentCreatedEvent event) {
+        Order order = orderRepo.findById(event.getOrderId()).orElseThrow();
+        order.setPaymentId(event.getPaymentId());
+        order.setStatus(OrderStatus.PAYMENT_PENDING);
+        orderRepo.save(order);
+    }
+
+    public Optional<OrderResponseForPaymentId> getPaymentIdFromOrder(String userId, Long orderId) {
+        return orderRepo.findByIdAndUserId(orderId,userId)
+                .map(order->{
+                    OrderResponseForPaymentId response= new OrderResponseForPaymentId();
+                    response.setOrderStatus(order.getStatus());
+                    response.setPaymentId(order.getPaymentId());
+                    return response;
+                });
+
+    }
 }

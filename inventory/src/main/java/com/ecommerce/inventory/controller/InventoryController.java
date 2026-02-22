@@ -27,6 +27,7 @@ public class InventoryController {
     }
 
 
+
     @GetMapping("/{productId}/availability")
     public ResponseEntity<Boolean> checkInventory(
             @PathVariable Long productId,

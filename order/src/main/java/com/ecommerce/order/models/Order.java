@@ -22,11 +22,13 @@ public class Order {
 
     private String userId;
 
-    private BigDecimal totalAmount;
+    private Long totalAmount;
+
+    @Column(unique = true)
+    private Long paymentId;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status = OrderStatus.PENDING;
-
+    private OrderStatus status;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
 

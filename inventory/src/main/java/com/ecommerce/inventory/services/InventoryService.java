@@ -1,17 +1,21 @@
 package com.ecommerce.inventory.services;
 
 import com.ecommerce.inventory.dto.eventDto.InventoryFailedEvent;
+import com.ecommerce.inventory.dto.eventDto.InventoryReservedEvent;
 import com.ecommerce.inventory.dto.eventDto.OrderCreatedEventDto;
 import com.ecommerce.inventory.dto.OrderItemDTO;
 import com.ecommerce.inventory.model.Inventory;
+import com.ecommerce.inventory.model.InventoryReservation;
 import com.ecommerce.inventory.model.InventoryStatus;
 import com.ecommerce.inventory.repository.InventoryRepo;
+import com.ecommerce.inventory.repository.InventoryReservationRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -21,12 +25,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InventoryService {
     private final InventoryRepo inventoryRepo;
+    private final InventoryReservationRepo reservationRepo;
     private final StreamBridge streamBridge;
 
 
     public boolean hasSufficientStockForRest(Long productId, Integer quantity) {
         return inventoryRepo.findById(productId)
-                .map(inventory -> quantity<=(inventory.getTotalQuantity()-inventory.getReservedQuantity()))
+                .map(inventory -> quantity <= (inventory.getTotalQuantity() - inventory.getReservedQuantity()))
                 .orElse(false);
     }
 
@@ -39,32 +44,59 @@ public class InventoryService {
 //        );
 
         /// efficient
-        List<Long> productIds= order.getItems().stream().map(OrderItemDTO::getProductId).toList();
+        List<Long> productIds = order.getItems().stream().map(OrderItemDTO::getProductId).toList();
 
-        List<Inventory> inventories= inventoryRepo.findAllById(productIds);
+        List<Inventory> inventories = inventoryRepo.findAllById(productIds);
 
-        Map<Long,Integer> inventoryMap= inventories.stream()
-                .collect(Collectors.toMap(Inventory::getProductId,Inventory::getTotalQuantity));
+        Map<Long, Inventory> inventoryMap = inventories.stream()
+                .collect(Collectors.toMap(Inventory::getProductId, inv -> inv));
 
-        boolean isAvailable= order.getItems().stream().allMatch(item->
-                inventoryMap.containsKey(item.getProductId()) &&
-                item.getQuantity() <= inventoryMap.get(item.getProductId())
-                );
 
-        if(isAvailable){
-            log.info("Stock is available");
+        boolean isAvailable = order.getItems().stream().allMatch(item -> {
+                    Inventory inv = inventoryMap.get(item.getProductId());
 
-        }else{
-            streamBridge.send("inventoryFailed-out-0",new InventoryFailedEvent(
+                    return inv != null &&
+                            item.getQuantity() <=
+                                    (inv.getTotalQuantity() - inv.getReservedQuantity());
+
+                }
+        );
+
+        if (!isAvailable) {
+            //log.info("Stock is available");
+            streamBridge.send("inventoryFailed-out-0", new InventoryFailedEvent(
                     order.getOrderId(),
                     order.getItems(),
                     "INSUFFICIENT STOCKS"
             ));
+            return;
         }
+        List<InventoryReservation> reservationList = new ArrayList<>();
+        for (OrderItemDTO dto : order.getItems()) {
+            Inventory inventory=inventoryMap.get(dto.getProductId());
+
+            inventory.setReservedQuantity(
+                    inventory.getReservedQuantity() + dto.getQuantity()
+            );
+
+            InventoryReservation reservation = new InventoryReservation();
+            reservation.setProductId(dto.getProductId());
+            reservation.setQuantity(dto.getQuantity());
+            reservation.setOrderId(order.getOrderId());
+            reservationList.add(reservation);
+        }
+        inventoryRepo.saveAll(inventories);
+        reservationRepo.saveAll(reservationList);
+
+        streamBridge.send("inventoryReserved-out-0", new InventoryReservedEvent(
+                order.getOrderId(),
+                order.getUserId(),
+                order.getTotalAmount()
+        ));
     }
 
     public void initializeInventory(Long productId) {
-        Inventory newInventory= new Inventory();
+        Inventory newInventory = new Inventory();
         newInventory.setProductId(productId);
         newInventory.setTotalQuantity(0);
         newInventory.setReservedQuantity(0);
@@ -74,12 +106,12 @@ public class InventoryService {
     }
 
     @Transactional
-    public void addStock(Long productId, int quantity){
-       Inventory inventory= inventoryRepo.findById(productId).orElseThrow(
-               ()-> new RuntimeException("Inventory Not Found")
-       );
+    public void addStock(Long productId, int quantity) {
+        Inventory inventory = inventoryRepo.findById(productId).orElseThrow(
+                () -> new RuntimeException("Inventory Not Found")
+        );
 
-       inventory.setTotalQuantity(inventory.getTotalQuantity()+quantity);
+        inventory.setTotalQuantity(inventory.getTotalQuantity() + quantity);
 
         int available = inventory.getTotalQuantity() - inventory.getReservedQuantity();
 
@@ -91,7 +123,7 @@ public class InventoryService {
             inventory.setStatus(InventoryStatus.IN_STOCK);
         }
 
-       inventoryRepo.save(inventory);
+        inventoryRepo.save(inventory);
     }
 
 }

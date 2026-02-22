@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,10 +25,12 @@ public class ProductService {
 
 
     public void productRequestToProduct(Product product, ProductRequest productRequest) {
+        Long price= productRequest.getPrice().multiply(BigDecimal.valueOf(100)).longValueExact();
+
         product.setName(productRequest.getName());
         product.setDescription(productRequest.getDescription());
         product.setCategory(productRequest.getCategory());
-        product.setPrice(productRequest.getPrice());
+        product.setPrice(price);
       //  product.setStockQuantity(productRequest.getStockQuantity());
         product.setImageUrl(productRequest.getImageUrl());
     }

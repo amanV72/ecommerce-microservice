@@ -15,7 +15,7 @@ import java.util.List;
 public class OrderCreatedEventDto {
     private Long orderId;
     private String userId;
-    private BigDecimal totalAmount;
+    private Long totalAmount;
     private List<OrderItemDTO> items;
     private LocalDateTime createdAt;
 }

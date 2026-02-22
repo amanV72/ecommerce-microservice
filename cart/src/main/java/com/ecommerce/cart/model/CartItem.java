@@ -27,8 +27,8 @@ public class CartItem {
     @Column(nullable = false)
     private Integer quantity;
 
-    private BigDecimal price;
-    private BigDecimal totalPrice;
+    private Long price;
+    private Long totalPrice;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

@@ -68,6 +68,10 @@ public class GatewayConfig {
                         ))
                         .uri("lb://USER-SERVICE")
                 )
+                .route("payment-service",r->r
+                        .path("/api/payments/**")
+                        .uri("lb://PAYMENT-SERVICE")
+                )
                 .route("cart-service", r -> r
                         .path("/api/cart/**")
                         .filters(f -> f.circuitBreaker(config -> config

@@ -39,11 +39,17 @@ public class CartService {
 
         CartItem existingItem = cartItemRepo.findByUserIdAndProductId(userId, request.getProductId());
 
+        long unitPrice = productResponse.getPrice(); // paise
+
         if (existingItem != null) {
             //Update the quantity
-            existingItem.setQuantity(existingItem.getQuantity() + request.getQuantity());
-            existingItem.setPrice(productResponse.getPrice());
-            existingItem.setTotalPrice(existingItem.getTotalPrice().add(productResponse.getPrice().multiply(BigDecimal.valueOf(request.getQuantity()))));
+            int newQuantity =
+                    existingItem.getQuantity() + request.getQuantity();
+
+            existingItem.setQuantity(newQuantity);
+            existingItem.setPrice(unitPrice);
+            existingItem.setTotalPrice(unitPrice * newQuantity);
+
             cartItemRepo.save(existingItem);
         } else {
             //Create a new cart item
@@ -52,7 +58,7 @@ public class CartService {
             cartItem.setProductId(request.getProductId());
             cartItem.setPrice(productResponse.getPrice());
             cartItem.setQuantity(request.getQuantity());
-            cartItem.setTotalPrice(productResponse.getPrice().multiply(BigDecimal.valueOf(request.getQuantity())));
+            cartItem.setTotalPrice(unitPrice*request.getQuantity());
             cartItemRepo.save(cartItem);
 
         }
@@ -92,9 +98,9 @@ public class CartService {
             return cir;
         }).toList();
 
-        BigDecimal cartTotal= items.stream()
+        Long cartTotal= items.stream()
                 .map(CartItem::getTotalPrice)
-                .reduce(BigDecimal.ZERO,BigDecimal::add);
+                .reduce(0L, Long::sum);
 
         CartResponse cartResponse= new CartResponse();
         cartResponse.setUserId(userId);

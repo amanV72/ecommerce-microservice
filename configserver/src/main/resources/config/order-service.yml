@@ -12,11 +12,11 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 
   cloud:
     function:
-      definition: inventoryFailed
+      definition: inventoryFailed;paymentCreated
     stream:
       bindings:
         orderSuccess-out-0:
@@ -27,6 +27,10 @@ spring:
           content-type: application/json
         inventoryFailed-in-0:
           destination: inventory-failed
+          group: order-service-group
+          content-type: application/json
+        paymentCreated-in-0:
+          destination: payment-created
           group: order-service-group
           content-type: application/json
       kafka:

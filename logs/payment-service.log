@@ -1,0 +1,843 @@
+2026-02-23T00:02:12.103+05:30  INFO 27740 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:04:07.346+05:30  INFO 27740 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4c1f858bec64f4e4c0230423f1ce-f4e4c0230423f1ce] c.ecommerce.payment.kafka.KafkaConsumer  : Received order is: 3 with userId: 30890ee9-4a6b-4320-b806-207be472c0da
+2026-02-23T00:04:07.518+05:30  INFO 27740 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4c1f858bec64f4e4c0230423f1ce-f4e4c0230423f1ce] c.e.payment.service.PaymentService       : Created order is: order_SJIA5sfuHnpgze
+2026-02-23T00:07:12.121+05:30  INFO 27740 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:12:12.128+05:30  INFO 27740 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:13:17.406+05:30  INFO 27740 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4e45070b391eb4a79990b292a120-b4a79990b292a120] c.ecommerce.payment.kafka.KafkaConsumer  : Received order is: 1 with userId: 30890ee9-4a6b-4320-b806-207be472c0da
+2026-02-23T00:13:17.510+05:30  INFO 27740 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4e45070b391eb4a79990b292a120-b4a79990b292a120] c.e.payment.service.PaymentService       : Created order is: order_SJIJmE0A33nakr
+2026-02-23T00:13:17.690+05:30  INFO 27740 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4e45070b391eb4a79990b292a120-b4a79990b292a120] c.e.payment.service.PaymentService       : Payment already exists for order 1
+2026-02-23T00:14:23.736+05:30  INFO 27740 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4e8783e23abe709e4442ae3cf717-709e4442ae3cf717] c.ecommerce.payment.kafka.KafkaConsumer  : Received order is: 2 with userId: 30890ee9-4a6b-4320-b806-207be472c0da
+2026-02-23T00:14:23.794+05:30  INFO 27740 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4e8783e23abe709e4442ae3cf717-709e4442ae3cf717] c.e.payment.service.PaymentService       : Created order is: order_SJIKwZxhSkIkYz
+2026-02-23T00:14:23.801+05:30  INFO 27740 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4e8783e23abe709e4442ae3cf717-709e4442ae3cf717] c.e.payment.service.PaymentService       : Payment already exists for order 2
+2026-02-23T00:16:48.222+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] c.e.payment.PaymentServiceApplication    : Starting PaymentServiceApplication using Java 24.0.1 with PID 30832 (C:\intellij\projects\ecom-application(micro-services)\payment\build\classes\java\main started by Aman in C:\intellij\projects\ecom-application(micro-services))
+2026-02-23T00:16:48.231+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] c.e.payment.PaymentServiceApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-23T00:16:48.348+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://localhost:8888
+2026-02-23T00:16:48.349+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.c.c.ConfigServerConfigDataLoader   : Located environment: name=payment-service, profiles=[default], label=null, version=null, state=null
+2026-02-23T00:16:50.922+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-23T00:16:51.250+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 302 ms. Found 1 JPA repository interface.
+2026-02-23T00:16:52.063+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2026-02-23T00:16:52.083+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2026-02-23T00:16:52.340+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.cloud.context.scope.GenericScope     : BeanFactory id=982d83d8-00f5-3cb5-be66-d3a5ceebe89e
+2026-02-23T00:16:54.100+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8086 (http)
+2026-02-23T00:16:54.126+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-23T00:16:54.127+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-23T00:16:54.195+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 5838 ms
+2026-02-23T00:16:55.987+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-23T00:16:56.197+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-23T00:16:57.124+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-23T00:16:57.171+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-23T00:16:57.319+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@685a3c14
+2026-02-23T00:16:57.321+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-23T00:16:57.382+05:30  WARN 30832 --- [payment-service] [main] [                                                 ] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-23T00:16:57.425+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/payment]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 14.19
+	Default catalog/schema: payment/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-23T00:16:59.335+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-23T00:16:59.554+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-23T00:17:00.323+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-23T00:17:00.875+05:30  WARN 30832 --- [payment-service] [main] [                                                 ] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-23T00:17:02.305+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.s.m.DirectWithAttributesChannel    : Channel 'payment-service.inventoryReserved-in-0' has 1 subscriber(s).
+2026-02-23T00:17:03.613+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
+2026-02-23T00:17:03.695+05:30  WARN 30832 --- [payment-service] [main] [                                                 ] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-02-23T00:17:03.705+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 32 endpoints beneath base path '/actuator'
+2026-02-23T00:17:03.862+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2026-02-23T00:17:03.862+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.i.channel.PublishSubscribeChannel    : Channel 'payment-service.errorChannel' has 1 subscriber(s).
+2026-02-23T00:17:03.863+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2026-02-23T00:17:03.879+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-02-23T00:17:03.909+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-02-23T00:17:03.913+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:17:03.922+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2026-02-23T00:17:03.923+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2026-02-23T00:17:03.923+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2026-02-23T00:17:03.923+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2026-02-23T00:17:03.923+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2026-02-23T00:17:03.923+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2026-02-23T00:17:03.923+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2026-02-23T00:17:04.289+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2026-02-23T00:17:04.293+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2026-02-23T00:17:04.295+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-02-23T00:17:04.296+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1771786024296 with initial instances count: 8
+2026-02-23T00:17:04.308+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application PAYMENT-SERVICE with eureka with status UP
+2026-02-23T00:17:04.310+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1771786024309, current=UP, previous=STARTING]
+2026-02-23T00:17:04.312+05:30  INFO 30832 --- [payment-service] [DiscoveryClient-InstanceInfoReplicator-%d] [                                                 ] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_PAYMENT-SERVICE/LAPTOP-QRIN86LF.mshome.net:payment-service:8086: registering service...
+2026-02-23T00:17:04.313+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.s.binder.DefaultBinderFactory      : Creating binder: kafka
+2026-02-23T00:17:04.313+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.s.binder.DefaultBinderFactory      : Constructing binder child context for kafka
+2026-02-23T00:17:04.374+05:30  INFO 30832 --- [payment-service] [DiscoveryClient-InstanceInfoReplicator-%d] [                                                 ] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_PAYMENT-SERVICE/LAPTOP-QRIN86LF.mshome.net:payment-service:8086 - registration status: 204
+2026-02-23T00:17:04.541+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.s.binder.DefaultBinderFactory      : Caching the binder: kafka
+2026-02-23T00:17:04.565+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.config.AbstractConfig   : AdminClientConfig values: 
+	bootstrap.controllers = []
+	bootstrap.servers = [localhost:9092]
+	client.dns.lookup = use_all_dns_ips
+	client.id = 
+	connections.max.idle.ms = 300000
+	default.api.timeout.ms = 60000
+	enable.metrics.push = false
+	metadata.max.age.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+
+2026-02-23T00:17:04.879+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.1.1
+2026-02-23T00:17:04.879+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: be816b82d25370ce
+2026-02-23T00:17:04.880+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1771786024877
+2026-02-23T00:17:05.380+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-02-23T00:17:05.380+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-02-23T00:17:05.380+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-02-23T00:17:05.385+05:30  INFO 30832 --- [payment-service] [kafka-admin-client-thread | adminclient-1] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : App info kafka.admin.client for adminclient-1 unregistered
+2026-02-23T00:17:05.389+05:30  INFO 30832 --- [payment-service] [kafka-admin-client-thread | adminclient-1] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-02-23T00:17:05.389+05:30  INFO 30832 --- [payment-service] [kafka-admin-client-thread | adminclient-1] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-02-23T00:17:05.389+05:30  INFO 30832 --- [payment-service] [kafka-admin-client-thread | adminclient-1] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-02-23T00:17:05.414+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.config.AbstractConfig   : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 100
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-payment-service-group-1
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = payment-service-group
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	share.acknowledgement.mode = implicit
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
+
+2026-02-23T00:17:05.464+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-02-23T00:17:05.535+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.1.1
+2026-02-23T00:17:05.536+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: be816b82d25370ce
+2026-02-23T00:17:05.536+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1771786025535
+2026-02-23T00:17:05.585+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-payment-service-group-1, groupId=payment-service-group] Cluster ID: 52V17y97Rf6vXwRXRM8Jew
+2026-02-23T00:17:05.593+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-1, groupId=payment-service-group] Resetting generation and member id due to: consumer pro-actively leaving the group
+2026-02-23T00:17:05.593+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-1, groupId=payment-service-group] Request joining group due to: consumer pro-actively leaving the group
+2026-02-23T00:17:05.603+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-02-23T00:17:05.604+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-02-23T00:17:05.604+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
+2026-02-23T00:17:05.605+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-02-23T00:17:05.616+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : App info kafka.consumer for consumer-payment-service-group-1 unregistered
+2026-02-23T00:17:05.684+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.stream.binder.BinderErrorChannel   : Channel 'kafka-278854447.inventoryReserved-in-0.errors' has 1 subscriber(s).
+2026-02-23T00:17:05.686+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.stream.binder.BinderErrorChannel   : Channel 'kafka-278854447.inventoryReserved-in-0.errors' has 0 subscriber(s).
+2026-02-23T00:17:05.686+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.stream.binder.BinderErrorChannel   : Channel 'kafka-278854447.inventoryReserved-in-0.errors' has 1 subscriber(s).
+2026-02-23T00:17:05.686+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.c.stream.binder.BinderErrorChannel   : Channel 'kafka-278854447.inventoryReserved-in-0.errors' has 2 subscriber(s).
+2026-02-23T00:17:05.733+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.config.AbstractConfig   : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 100
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-payment-service-group-2
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = payment-service-group
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	share.acknowledgement.mode = implicit
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
+
+2026-02-23T00:17:05.734+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-02-23T00:17:05.746+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.1.1
+2026-02-23T00:17:05.746+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: be816b82d25370ce
+2026-02-23T00:17:05.746+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1771786025746
+2026-02-23T00:17:05.764+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] Subscribed to topic(s): inventory-reserved
+2026-02-23T00:17:05.777+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] s.i.k.i.KafkaMessageDrivenChannelAdapter : started org.springframework.integration.kafka.inbound.KafkaMessageDrivenChannelAdapter@2e581514
+2026-02-23T00:17:05.808+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8086 (http) with context path '/'
+2026-02-23T00:17:05.811+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8086
+2026-02-23T00:17:05.815+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] Cluster ID: 52V17y97Rf6vXwRXRM8Jew
+2026-02-23T00:17:05.821+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] Discovered group coordinator localhost:9092 (id: 2147483646 rack: null isFenced: false)
+2026-02-23T00:17:05.825+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] (Re-)joining group
+2026-02-23T00:17:05.875+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] Request joining group due to: need to re-join with the given member-id: consumer-payment-service-group-2-40cbfd12-4af8-4c50-9e95-854b8f52c239
+2026-02-23T00:17:05.876+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] (Re-)joining group
+2026-02-23T00:17:06.006+05:30  INFO 30832 --- [payment-service] [main] [                                                 ] c.e.payment.PaymentServiceApplication    : Started PaymentServiceApplication in 19.512 seconds (process running for 20.836)
+2026-02-23T00:17:06.784+05:30  INFO 30832 --- [payment-service] [pool-7-thread-1] [                                                 ] o.a.kafka.common.config.AbstractConfig   : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-payment-service-group-3
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = true
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = payment-service-group
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	share.acknowledgement.mode = implicit
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
+
+2026-02-23T00:17:06.784+05:30  INFO 30832 --- [payment-service] [pool-7-thread-1] [                                                 ] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-02-23T00:17:06.788+05:30  INFO 30832 --- [payment-service] [pool-7-thread-1] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.1.1
+2026-02-23T00:17:06.789+05:30  INFO 30832 --- [payment-service] [pool-7-thread-1] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: be816b82d25370ce
+2026-02-23T00:17:06.789+05:30  INFO 30832 --- [payment-service] [pool-7-thread-1] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1771786026788
+2026-02-23T00:17:06.797+05:30  INFO 30832 --- [payment-service] [pool-7-thread-1] [                                                 ] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-payment-service-group-3, groupId=payment-service-group] Cluster ID: 52V17y97Rf6vXwRXRM8Jew
+2026-02-23T00:17:06.817+05:30  INFO 30832 --- [payment-service] [pool-7-thread-1] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-3, groupId=payment-service-group] Discovered group coordinator localhost:9092 (id: 2147483646 rack: null isFenced: false)
+2026-02-23T00:17:17.114+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] Successfully joined group with generation Generation{generationId=11, memberId='consumer-payment-service-group-2-40cbfd12-4af8-4c50-9e95-854b8f52c239', protocol='range'}
+2026-02-23T00:17:17.121+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] Finished assignment for group at generation 11: {consumer-payment-service-group-2-40cbfd12-4af8-4c50-9e95-854b8f52c239=Assignment(partitions=[inventory-reserved-0])}
+2026-02-23T00:17:17.131+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] Successfully synced group in generation Generation{generationId=11, memberId='consumer-payment-service-group-2-40cbfd12-4af8-4c50-9e95-854b8f52c239', protocol='range'}
+2026-02-23T00:17:17.132+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] Notifying assignor about the new Assignment(partitions=[inventory-reserved-0])
+2026-02-23T00:17:17.134+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-payment-service-group-2, groupId=payment-service-group] Adding newly assigned partitions: [inventory-reserved-0]
+2026-02-23T00:17:17.139+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.a.k.c.c.internals.ConsumerUtils        : Setting offset for partition inventory-reserved-0 to the committed offset FetchPosition{offset=18, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:9092 (id: 1 rack: null isFenced: false)], epoch=0}}
+2026-02-23T00:17:17.141+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [                                                 ] o.s.c.s.b.k.KafkaMessageChannelBinder$2  : payment-service-group: partitions assigned: [inventory-reserved-0]
+2026-02-23T00:19:43.467+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] c.ecommerce.payment.kafka.KafkaConsumer  : Received order is: 1 with userId: 30890ee9-4a6b-4320-b806-207be472c0da
+2026-02-23T00:19:43.934+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] c.e.payment.service.PaymentService       : Created order is: order_SJIQa14jyTGoLQ
+2026-02-23T00:19:44.599+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.s.c.s.b.k.p.KafkaTopicProvisioner      : Using kafka topic for outbound: payment-created
+2026-02-23T00:19:44.600+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.kafka.common.config.AbstractConfig   : AdminClientConfig values: 
+	bootstrap.controllers = []
+	bootstrap.servers = [localhost:9092]
+	client.dns.lookup = use_all_dns_ips
+	client.id = 
+	connections.max.idle.ms = 300000
+	default.api.timeout.ms = 60000
+	enable.metrics.push = false
+	metadata.max.age.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+
+2026-02-23T00:19:44.605+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.1.1
+2026-02-23T00:19:44.606+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: be816b82d25370ce
+2026-02-23T00:19:44.606+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1771786184605
+2026-02-23T00:19:44.632+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-02-23T00:19:44.633+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-02-23T00:19:44.633+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-02-23T00:19:44.634+05:30  INFO 30832 --- [payment-service] [kafka-admin-client-thread | adminclient-2] [                                                 ] o.a.kafka.common.utils.AppInfoParser     : App info kafka.admin.client for adminclient-2 unregistered
+2026-02-23T00:19:44.635+05:30  INFO 30832 --- [payment-service] [kafka-admin-client-thread | adminclient-2] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-02-23T00:19:44.636+05:30  INFO 30832 --- [payment-service] [kafka-admin-client-thread | adminclient-2] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-02-23T00:19:44.636+05:30  INFO 30832 --- [payment-service] [kafka-admin-client-thread | adminclient-2] [                                                 ] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-02-23T00:19:44.651+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.k.clients.producer.ProducerConfig    : Idempotence will be disabled because acks is set to 1, not set to 'all'.
+2026-02-23T00:19:44.651+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.kafka.common.config.AbstractConfig   : ProducerConfig values: 
+	acks = 1
+	batch.size = 16384
+	bootstrap.servers = [localhost:9092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = producer-1
+	compression.gzip.level = -1
+	compression.lz4.level = 9
+	compression.type = none
+	compression.zstd.level = 3
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = false
+	enable.metrics.push = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.ByteArraySerializer
+	linger.ms = 0
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transaction.two.phase.commit.enable = false
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.ByteArraySerializer
+
+2026-02-23T00:19:44.652+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-02-23T00:19:44.685+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.1.1
+2026-02-23T00:19:44.685+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: be816b82d25370ce
+2026-02-23T00:19:44.685+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1771786184685
+2026-02-23T00:19:44.695+05:30  INFO 30832 --- [payment-service] [kafka-producer-network-thread | producer-1] [                                                 ] org.apache.kafka.clients.Metadata        : [Producer clientId=producer-1] Cluster ID: 52V17y97Rf6vXwRXRM8Jew
+2026-02-23T00:19:44.717+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.s.c.s.m.DirectWithAttributesChannel    : Channel 'payment-service.paymentCreated-out-0' has 1 subscriber(s).
+2026-02-23T00:19:44.718+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] o.s.c.s.binder.kafka.KafkaBinderMetrics  : Try to shutdown the old scheduler with 1 threads
+2026-02-23T00:19:44.721+05:30  WARN 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b4fc7e14d250d3cb92d81d41b2fe0-3cb92d81d41b2fe0] i.m.core.instrument.MeterRegistry        : This Gauge has been already registered (MeterId{name='spring.cloud.stream.binder.kafka.offset', tags=[tag(group=payment-service-group),tag(topic=inventory-reserved)]}), the registration will be ignored. Note that subsequent logs will be logged at debug level.
+2026-02-23T00:20:32.156+05:30  INFO 30832 --- [payment-service] [http-nio-8086-exec-1] [                                                 ] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-23T00:20:32.156+05:30  INFO 30832 --- [payment-service] [http-nio-8086-exec-1] [                                                 ] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-23T00:20:32.159+05:30  INFO 30832 --- [payment-service] [http-nio-8086-exec-1] [                                                 ] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-02-23T00:20:32.220+05:30  INFO 30832 --- [payment-service] [http-nio-8086-exec-1] [699b4ff8b751aacde299e7bc2b7923ce-e299e7bc2b7923ce] c.e.payment.service.PaymentService       : Received user id is: 30890ee9-4a6b-4320-b806-207be472c0da with paymentID: 1
+2026-02-23T00:20:49.219+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b50096e04668d5940f504d33f4cc9-5940f504d33f4cc9] c.ecommerce.payment.kafka.KafkaConsumer  : Received order is: 2 with userId: 30890ee9-4a6b-4320-b806-207be472c0da
+2026-02-23T00:20:49.379+05:30  INFO 30832 --- [payment-service] [KafkaConsumerDestination{consumerDestinationName='inventory-reserved', partitions=1, dlqName='null'}.container-0-C-1] [699b50096e04668d5940f504d33f4cc9-5940f504d33f4cc9] c.e.payment.service.PaymentService       : Created order is: order_SJIRjQ7h3fWOYk
+2026-02-23T00:21:07.724+05:30  INFO 30832 --- [payment-service] [http-nio-8086-exec-4] [699b501bf3f32ccd2ee4747eea08c6a1-2ee4747eea08c6a1] c.e.payment.service.PaymentService       : Received user id is: 30890ee9-4a6b-4320-b806-207be472c0da with paymentID: 2
+2026-02-23T00:22:03.926+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:27:03.938+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:32:03.942+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:37:03.965+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:40:34.379+05:30  WARN 30832 --- [payment-service] [AsyncReporter{ZipkinHttpClientSender{http://localhost:9411/api/v2/spans}}] [                                                 ] z.r.i.AsyncReporter$BoundedAsyncReporter : Spans were dropped due to exceptions. All subsequent errors will be logged at FINE level.
+2026-02-23T00:40:35.117+05:30  WARN 30832 --- [payment-service] [AsyncReporter{ZipkinHttpClientSender{http://localhost:9411/api/v2/spans}}] [                                                 ] z.r.i.AsyncReporter$BoundedAsyncReporter : Dropped 1 spans due to HttpTimeoutException(request timed out)
+
+java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:921) ~[java.net.http:na]
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133) ~[java.net.http:na]
+	at org.springframework.boot.zipkin.autoconfigure.ZipkinHttpClientSender.postSpans(ZipkinHttpClientSender.java:59) ~[spring-boot-zipkin-4.0.2.jar:4.0.2]
+	at org.springframework.boot.zipkin.autoconfigure.HttpSender.postSpans(HttpSender.java:69) ~[spring-boot-zipkin-4.0.2.jar:4.0.2]
+	at org.springframework.boot.zipkin.autoconfigure.HttpSender.postSpans(HttpSender.java:41) ~[spring-boot-zipkin-4.0.2.jar:4.0.2]
+	at zipkin2.reporter.BaseHttpSender.send(BaseHttpSender.java:123) ~[zipkin-reporter-3.5.1.jar:na]
+	at zipkin2.reporter.internal.AsyncReporter$BoundedAsyncReporter.flush(AsyncReporter.java:266) ~[zipkin-reporter-3.5.1.jar:na]
+	at zipkin2.reporter.internal.AsyncReporter$Flusher.run(AsyncReporter.java:352) ~[zipkin-reporter-3.5.1.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[na:na]
+
+2026-02-23T00:42:03.992+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:47:04.065+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:52:04.139+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T00:57:04.165+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:02:04.243+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:05:03.535+05:30  INFO 30832 --- [payment-service] [http-nio-8086-exec-6] [699b5a678186169ea0ba69a199d036d2-a0ba69a199d036d2] c.e.payment.service.PaymentService       : Received user id is: 30890ee9-4a6b-4320-b806-207be472c0da with paymentID: 2
+2026-02-23T01:07:04.367+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:12:04.381+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:17:04.382+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:22:04.399+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:27:04.411+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:32:04.418+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:37:04.422+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:42:04.426+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:47:04.429+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:52:04.439+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T01:57:04.455+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T02:02:04.463+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-02-23T02:07:04.467+05:30  INFO 30832 --- [payment-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration

@@ -10,5 +10,5 @@ import java.util.List;
 public class CartResponse {
     private String userId;
     private List<CartItemsResponse> items;
-    private BigDecimal cartTotal;
+    private Long cartTotal;
 }
