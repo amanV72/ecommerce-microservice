@@ -26,6 +26,9 @@ spring:
         paymentCreated-out-0:
           destination: payment-created
           content-type: application/json
+        paymentFailed-out-0:
+          destination: payment-failed
+          content-type: application/json
       kafka:
         binder:
           broker: localhost:9092

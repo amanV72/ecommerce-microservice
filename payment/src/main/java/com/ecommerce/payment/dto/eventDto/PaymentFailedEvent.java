@@ -8,7 +8,6 @@ import lombok.Data;
 public class PaymentFailedEvent {
     private Long orderId;
     private String userId;
-    private
-    private String
+    private String reason;
 
 }

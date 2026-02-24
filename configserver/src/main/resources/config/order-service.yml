@@ -33,6 +33,10 @@ spring:
           destination: payment-created
           group: order-service-group
           content-type: application/json
+        inventoryReverted-in-0:
+          destination: inventory-reverted
+          group: order-service-group
+          content-type: application/json
       kafka:
         binders:
           brokers: localhost:9092

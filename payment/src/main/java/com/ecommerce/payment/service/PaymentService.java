@@ -3,6 +3,7 @@ package com.ecommerce.payment.service;
 import com.ecommerce.payment.dto.eventDto.InventoryReservedEvent;
 import com.ecommerce.payment.dto.eventDto.PaymentCreatedEvent;
 import com.ecommerce.payment.dto.RazorpayOrderDetails;
+import com.ecommerce.payment.dto.eventDto.PaymentFailedEvent;
 import com.ecommerce.payment.model.AttemptStatus;
 import com.ecommerce.payment.model.PaymentAttempts;
 import com.ecommerce.payment.model.PaymentStatus;
@@ -84,8 +85,11 @@ public class PaymentService {
             ));
 
         } catch (RazorpayException e) {
-            //TODO
-           streamBridge.send("paymentFailed-out-0", "PAYMENT FAILED");
+           streamBridge.send("paymentFailed-out-0", new PaymentFailedEvent(
+                   event.getOrderId(),
+                   event.getUserId(),
+                   "PAYMENT FAILED"
+           ));
         }
 
     }

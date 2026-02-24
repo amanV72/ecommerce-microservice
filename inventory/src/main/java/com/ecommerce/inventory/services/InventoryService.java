@@ -1,8 +1,6 @@
 package com.ecommerce.inventory.services;
 
-import com.ecommerce.inventory.dto.eventDto.InventoryFailedEvent;
-import com.ecommerce.inventory.dto.eventDto.InventoryReservedEvent;
-import com.ecommerce.inventory.dto.eventDto.OrderCreatedEventDto;
+import com.ecommerce.inventory.dto.eventDto.*;
 import com.ecommerce.inventory.dto.OrderItemDTO;
 import com.ecommerce.inventory.model.Inventory;
 import com.ecommerce.inventory.model.InventoryReservation;
@@ -35,6 +33,7 @@ public class InventoryService {
                 .orElse(false);
     }
 
+    @Transactional
     public void hasSufficientStockForEvent(OrderCreatedEventDto order) {
         /// higher time complexity O(N)
 //        return orderItems.stream().allMatch(item->
@@ -73,7 +72,7 @@ public class InventoryService {
         }
         List<InventoryReservation> reservationList = new ArrayList<>();
         for (OrderItemDTO dto : order.getItems()) {
-            Inventory inventory=inventoryMap.get(dto.getProductId());
+            Inventory inventory = inventoryMap.get(dto.getProductId());
 
             inventory.setReservedQuantity(
                     inventory.getReservedQuantity() + dto.getQuantity()
@@ -126,4 +125,34 @@ public class InventoryService {
         inventoryRepo.save(inventory);
     }
 
+    @Transactional
+    public void revertInventory(PaymentFailedEvent event) {
+        List<InventoryReservation> reservations = reservationRepo.findByOrderId(event.getOrderId()).orElseThrow();
+        if (reservations.isEmpty()) return;
+        List<Long> productIds = reservations.stream().map(InventoryReservation::getProductId).toList();
+
+
+        List<Inventory> inventories = inventoryRepo.findAllById(productIds);
+        Map<Long, Inventory> quantityMap = inventories.stream().collect(Collectors.toMap(Inventory::getProductId, inv -> inv));
+
+        for (InventoryReservation reserved : reservations) {
+            Inventory inventory = quantityMap.get(reserved.getProductId());
+
+            if (inventory != null) {
+                inventory.setReservedQuantity(
+                        inventory.getReservedQuantity() - reserved.getQuantity()
+                );
+
+            }
+
+        }
+        reservationRepo.deleteAll(reservations);
+        streamBridge.send("inventoryReverted-out-0",new InventoryRevertedEvent(
+                event.getOrderId(),
+                event.getUserId(),
+                "INVENTORY RESERVED"
+        ));
+
+
+    }
 }

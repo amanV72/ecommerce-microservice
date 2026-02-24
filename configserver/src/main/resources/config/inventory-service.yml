@@ -23,12 +23,20 @@ spring:
           destination: order-created
           content-type: application/json
           group: inventory-service-group
+        paymentFailed-in-0:
+          destination: payment-failed
+          content-type: application/json
+          group: inventory-service-group
         inventoryFailed-out-0:
           destination: inventory-failed
           content-type: application/json
         inventoryReserved-out-0:
           destination: inventory-reserved
           content-type: application/json
+        inventoryReverted-out-0:
+          destination: inventory-reverted
+          content-type: application/json
+
       kafka:
         binder:
           brokers: localhost:9092

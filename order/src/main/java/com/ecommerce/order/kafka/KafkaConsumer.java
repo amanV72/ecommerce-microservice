@@ -1,6 +1,7 @@
 package com.ecommerce.order.kafka;
 
 import com.ecommerce.order.dtos.eventDto.InventoryFailedEvent;
+import com.ecommerce.order.dtos.eventDto.InventoryRevertedEvent;
 import com.ecommerce.order.dtos.eventDto.PaymentCreatedEvent;
 import com.ecommerce.order.services.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,14 @@ public class KafkaConsumer {
         return event->{
             log.info("Razorpay orderId is: {}",event.getOrderId());
             orderService.attachPaymentIdToModel(event);
+        };
+    }
+
+    @Bean
+    Consumer<InventoryRevertedEvent> inventoryReverted(){
+        return event ->{
+            log.info("Order id: {} is cancelled because {}",event.getOrderId(),event.getReason());
+          //  orderService.cancelOrder(event);
         };
     }
 }

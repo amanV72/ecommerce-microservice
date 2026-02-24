@@ -1,6 +1,7 @@
 package com.ecommerce.inventory.kafka;
 
 import com.ecommerce.inventory.dto.eventDto.OrderCreatedEventDto;
+import com.ecommerce.inventory.dto.eventDto.PaymentFailedEvent;
 import com.ecommerce.inventory.dto.eventDto.ProductCreatedEvent;
 import com.ecommerce.inventory.services.InventoryService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,14 @@ public class KafkaConsumer {
         return event-> {
             log.info("Received order is: {}",event.getOrderId());
             inventoryService.hasSufficientStockForEvent(event);
+        };
+    }
+
+    @Bean
+    Consumer<PaymentFailedEvent> paymentFailed(){
+        return event-> {
+            log.info("Payment Failed order is: {}",event.getOrderId());
+            inventoryService.revertInventory(event);
         };
     }
 }
