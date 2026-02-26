@@ -16,7 +16,7 @@ spring:
 
   cloud:
     function:
-      definition: inventoryFailed;paymentCreated
+      definition: inventoryFailed;paymentCreated;inventoryReverted;paymentSuccess
     stream:
       bindings:
         orderSuccess-out-0:
@@ -35,6 +35,10 @@ spring:
           content-type: application/json
         inventoryReverted-in-0:
           destination: inventory-reverted
+          group: order-service-group
+          content-type: application/json
+        paymentSuccess-in-0:
+          destination: payment-success
           group: order-service-group
           content-type: application/json
       kafka:

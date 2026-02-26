@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class InventoryRevertedEvent {
+public class InventoryRevertedEvent implements OrderCancellationEvent{
     private Long orderId;
     private String userId;
     private String reason;

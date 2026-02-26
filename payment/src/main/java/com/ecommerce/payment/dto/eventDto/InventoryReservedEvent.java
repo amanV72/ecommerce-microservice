@@ -7,4 +7,5 @@ public class InventoryReservedEvent {
     private Long orderId;
     private String userId;
     private Long totalAmount;
+    private boolean simulateFailure;
 }

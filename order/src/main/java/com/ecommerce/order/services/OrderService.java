@@ -3,11 +3,9 @@ package com.ecommerce.order.services;
 import com.ecommerce.order.clients.CartServiceClient;
 import com.ecommerce.order.dtos.CartResponse;
 import com.ecommerce.order.dtos.OrderResponseForPaymentId;
-import com.ecommerce.order.dtos.eventDto.InventoryFailedEvent;
-import com.ecommerce.order.dtos.eventDto.OrderCreatedEventDto;
+import com.ecommerce.order.dtos.eventDto.*;
 import com.ecommerce.order.dtos.OrderItemDTO;
 import com.ecommerce.order.dtos.OrderResponse;
-import com.ecommerce.order.dtos.eventDto.PaymentCreatedEvent;
 import com.ecommerce.order.models.OrderStatus;
 import com.ecommerce.order.models.Order;
 import com.ecommerce.order.models.OrderItem;
@@ -107,7 +105,7 @@ public class OrderService {
     }
 
     @Transactional
-    public void cancelOrder(InventoryFailedEvent event) {
+    public void cancelOrder(OrderCancellationEvent event) {
 
         Order order = orderRepo.findById(event.getOrderId())
                 .orElseThrow(() -> new RuntimeException("Order not found"));
@@ -134,5 +132,11 @@ public class OrderService {
                     return response;
                 });
 
+    }
+    @Transactional
+    public void handlePaymentSuccess(PaymentSuccessEvent event) {
+        Order order= orderRepo.findById(event.getOrderId()).orElseThrow();
+        order.setStatus(OrderStatus.CONFIRMED);
+        orderRepo.save(order);
     }
 }

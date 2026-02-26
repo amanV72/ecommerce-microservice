@@ -21,6 +21,7 @@ public class Inventory {
 
     private int totalQuantity;
     private int reservedQuantity;
+    private int sold;
 
     @Enumerated(EnumType.STRING)
     private InventoryStatus status;

@@ -1,17 +1,18 @@
 package com.ecommerce.payment.service;
 
+import com.ecommerce.payment.dto.PaymentVerificationRequest;
 import com.ecommerce.payment.dto.eventDto.InventoryReservedEvent;
 import com.ecommerce.payment.dto.eventDto.PaymentCreatedEvent;
 import com.ecommerce.payment.dto.RazorpayOrderDetails;
 import com.ecommerce.payment.dto.eventDto.PaymentFailedEvent;
+import com.ecommerce.payment.dto.eventDto.PaymentSuccessEvent;
 import com.ecommerce.payment.model.AttemptStatus;
 import com.ecommerce.payment.model.PaymentAttempts;
 import com.ecommerce.payment.model.PaymentStatus;
 import com.ecommerce.payment.model.Payments;
+import com.ecommerce.payment.repo.PaymentAttemptsRepo;
 import com.ecommerce.payment.repo.PaymentsRepo;
-import com.razorpay.Order;
-import com.razorpay.RazorpayClient;
-import com.razorpay.RazorpayException;
+import com.razorpay.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,17 +38,20 @@ public class PaymentService {
 
     private final PaymentsRepo paymentsRepo;
 
+    private final PaymentAttemptsRepo paymentAttemptsRepo;
+
     @Transactional
     public void createOrder(InventoryReservedEvent event) {
         try {
+//            if(event.isSimulateFailure()) {
+//                log.error("Payment failing......");
+//                throw new RazorpayException("Payment failure simulation");
+//            }
             RazorpayClient razorpayClient = new RazorpayClient(apiKey, apiSecret);
             JSONObject object = new JSONObject();
             object.put("amount", event.getTotalAmount());
             object.put("currency", "INR");
             object.put("receipt", "order_" + event.getOrderId());
-
-            Order order = razorpayClient.orders.create(object);
-            log.info("Created order is: " + order.get("id"));
 
             Payments existing = paymentsRepo.findByOrderId(event.getOrderId());
 
@@ -59,6 +63,8 @@ public class PaymentService {
                 ));
                 return;
             }
+            Order order = razorpayClient.orders.create(object);
+            log.info("Created order is: " + order.get("id"));
 
             Payments payments= new Payments();
             payments.setOrderId(event.getOrderId());
@@ -114,5 +120,54 @@ public class PaymentService {
 
         return orderDetails;
 
+    }
+
+    @Transactional
+    public boolean verifyRazorpayPayment(PaymentVerificationRequest dto,String userId) {
+        JSONObject payment = new JSONObject();
+        payment.put("razorpay_order_id", dto.getOrderId());
+        payment.put("razorpay_payment_id", dto.getPaymentId());
+        payment.put("razorpay_signature", dto.getSignature());
+        try {
+           boolean verified = Utils.verifyPaymentSignature(payment, apiSecret);
+           if(!verified) return false;
+
+
+           PaymentAttempts attempts=paymentAttemptsRepo.findByRazorpayOrderId(dto.getOrderId()).orElseThrow();
+           Payments model= attempts.getPayment();
+           if(!model.getUserId().equals(userId)) return false;
+
+           if (attempts.getStatus()==AttemptStatus.SUCCESS) return true;
+
+           RazorpayClient client= new RazorpayClient(apiKey,apiSecret);
+           Payment razorpayPayment= client.payments.fetch(dto.getPaymentId());
+
+           String status = razorpayPayment.get("status");
+           if (!"captured".equals(status)) {
+                return false;
+            }
+
+            Number amountNumber = razorpayPayment.get("amount");
+            Long razorpayAmount = amountNumber.longValue();
+            if(!razorpayAmount.equals(model.getTotalAmount())) return false;
+
+           attempts.setRazorpayPaymentId(dto.getPaymentId());
+           attempts.setStatus(AttemptStatus.SUCCESS);
+
+
+           model.setStatus(PaymentStatus.SUCCESS);
+
+            streamBridge.send("paymentSuccess-out-0",
+                    new PaymentSuccessEvent(
+                            model.getOrderId(),
+                            model.getId(),
+                            model.getUserId()
+                    )
+            );
+            return true;
+
+        } catch (RazorpayException e) {
+            return false;
+        }
     }
 }

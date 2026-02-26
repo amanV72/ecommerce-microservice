@@ -10,6 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 public class InventoryFailedEvent {
     private Long orderId;
-    private List<OrderItemDTO> orderItems;
     private String reason;
 }

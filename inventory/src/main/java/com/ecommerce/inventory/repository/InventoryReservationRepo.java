@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface InventoryReservationRepo extends JpaRepository<InventoryReservation,Long> {
-    Optional<List<InventoryReservation>> findByOrderId(Long orderId);
+    List<InventoryReservation> findByOrderId(Long orderId);
 }

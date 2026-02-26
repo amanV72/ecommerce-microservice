@@ -65,7 +65,6 @@ public class InventoryService {
             //log.info("Stock is available");
             streamBridge.send("inventoryFailed-out-0", new InventoryFailedEvent(
                     order.getOrderId(),
-                    order.getItems(),
                     "INSUFFICIENT STOCKS"
             ));
             return;
@@ -90,7 +89,8 @@ public class InventoryService {
         streamBridge.send("inventoryReserved-out-0", new InventoryReservedEvent(
                 order.getOrderId(),
                 order.getUserId(),
-                order.getTotalAmount()
+                order.getTotalAmount(),
+                true
         ));
     }
 
@@ -127,7 +127,7 @@ public class InventoryService {
 
     @Transactional
     public void revertInventory(PaymentFailedEvent event) {
-        List<InventoryReservation> reservations = reservationRepo.findByOrderId(event.getOrderId()).orElseThrow();
+        List<InventoryReservation> reservations = reservationRepo.findByOrderId(event.getOrderId());
         if (reservations.isEmpty()) return;
         List<Long> productIds = reservations.stream().map(InventoryReservation::getProductId).toList();
 
@@ -153,6 +153,38 @@ public class InventoryService {
                 "INVENTORY RESERVED"
         ));
 
+
+    }
+
+    @Transactional
+    public void handlePaymentSuccess(PaymentSuccessEvent event) {
+        List<InventoryReservation> reservations = reservationRepo.findByOrderId(event.getOrderId());
+        if (reservations.isEmpty()) return;
+
+        List<Long> productIds = reservations.stream().map(InventoryReservation::getProductId).toList();
+
+
+        List<Inventory> inventories = inventoryRepo.findAllById(productIds);
+        Map<Long, Inventory> quantityMap = inventories.stream().collect(Collectors.toMap(Inventory::getProductId, inv -> inv));
+
+        for (InventoryReservation reserved : reservations) {
+            Inventory inventory = quantityMap.get(reserved.getProductId());
+
+            if (inventory != null) {
+                inventory.setReservedQuantity(
+                        inventory.getReservedQuantity() - reserved.getQuantity()
+                );
+                inventory.setTotalQuantity(
+                        inventory.getTotalQuantity() - reserved.getQuantity()
+                );
+                inventory.setSold(
+                        inventory.getSold()+reserved.getQuantity()
+                );
+
+            }
+
+        }
+        reservationRepo.deleteAll(reservations);
 
     }
 }

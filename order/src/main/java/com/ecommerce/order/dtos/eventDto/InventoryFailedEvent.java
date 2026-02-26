@@ -8,8 +8,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class InventoryFailedEvent {
+public class InventoryFailedEvent implements OrderCancellationEvent{
     private Long orderId;
-    private List<OrderItemDTO> orderItems;
     private String reason;
 }
