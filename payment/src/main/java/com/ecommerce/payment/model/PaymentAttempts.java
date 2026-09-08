@@ -1,7 +1,10 @@
 package com.ecommerce.payment.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -9,6 +12,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "payment_attempts")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PaymentAttempts {
 
     @Id

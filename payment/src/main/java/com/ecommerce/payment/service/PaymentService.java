@@ -40,6 +40,8 @@ public class PaymentService {
 
     private final PaymentAttemptsRepo paymentAttemptsRepo;
 
+    private final RazorpayClient razorpayClient;
+
     @Transactional
     public void createOrder(InventoryReservedEvent event) {
         try {
@@ -47,7 +49,7 @@ public class PaymentService {
 //                log.error("Payment failing......");
 //                throw new RazorpayException("Payment failure simulation");
 //            }
-            RazorpayClient razorpayClient = new RazorpayClient(apiKey, apiSecret);
+
             JSONObject object = new JSONObject();
             object.put("amount", event.getTotalAmount());
             object.put("currency", "INR");
@@ -56,7 +58,7 @@ public class PaymentService {
             Payments existing = paymentsRepo.findByOrderId(event.getOrderId());
 
             if (existing != null) {
-                log.info("Payment already exists for order {}", event.getOrderId());
+               // log.info("Payment already exists for order {}", event.getOrderId());
                 streamBridge.send("paymentCreated-out-0", new PaymentCreatedEvent(
                         existing.getOrderId(),
                         existing.getId()
@@ -64,7 +66,7 @@ public class PaymentService {
                 return;
             }
             Order order = razorpayClient.orders.create(object);
-            log.info("Created order is: " + order.get("id"));
+          //  log.info("Created order is: " + order.get("id"));
 
             Payments payments= new Payments();
             payments.setOrderId(event.getOrderId());
@@ -101,7 +103,7 @@ public class PaymentService {
     }
 
     public RazorpayOrderDetails getRazorpayOrderDetails(Long paymentId,String userId) {
-        log.info("Received user id is: {} with paymentID: {}",userId,paymentId);
+      //  log.info("Received user id is: {} with paymentID: {}",userId,paymentId);
         Payments payments= paymentsRepo.findById(paymentId).orElseThrow();
 
         if(!payments.getUserId().equals(userId)) throw new RuntimeException("Unauthorized access");
@@ -139,8 +141,7 @@ public class PaymentService {
 
            if (attempts.getStatus()==AttemptStatus.SUCCESS) return true;
 
-           RazorpayClient client= new RazorpayClient(apiKey,apiSecret);
-           Payment razorpayPayment= client.payments.fetch(dto.getPaymentId());
+           Payment razorpayPayment= razorpayClient.payments.fetch(dto.getPaymentId());
 
            String status = razorpayPayment.get("status");
            if (!"captured".equals(status)) {
